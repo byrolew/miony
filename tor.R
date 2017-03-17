@@ -4,7 +4,7 @@ track <- function(momentum){
   dist2 <- 5
   dist3 <- 6
   distances <- c(dist1, dist2, dist3)
-  r1 <- (momentum/(4))*(10/3) #Teraz powinny być tu metry
+  r1 <- (momentum/(4))*(10/3) #Teraz powinny byc tu metry, ale moze Pan sprawdzic
   r2 <- 2*r1
   center1 <- c(0, r1)
   cos.angle.between.radius1 <- ((2*r1^2 - end.of.bigger.field^2)/(2*r1^2))
@@ -24,6 +24,8 @@ track <- function(momentum){
 
 standard.error <- function(measurements){
   errors <- round(rnorm(3, 0, 1/(5*measurements[1]))*(4096/(2*pi)))
+  #jako, ze i tak bedziemy zmieniac rozklad, z jakiego korzystamy, to uznalam,
+  #ze moge na razie nie bawic sie i dac stala
   for(i in c(2:4)){
     measurements[i] <- measurements[i] + errors[1]
   }
