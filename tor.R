@@ -16,7 +16,7 @@ track <- function(momentum){
   idx <- 2
   for(i in distances){
     cos.angle <- (i^2 + odl.center2^2 - r2^2)/(2*i*odl.center2)
-    measurements[idx] <- round((4096/2*pi)*(acos(cos.angle) + angle.center2))
+    measurements[idx] <- round((4096/(2*pi))*(acos(cos.angle) + angle.center2))
     idx <- idx + 1
   }
   return(measurements)
@@ -41,3 +41,20 @@ change.direction <- function(measurements){
   measurements[2:4] = (measurements[2:4] + dir)%%4096
   return(measurements)
 }
+
+get.single.track <- function(m) {
+  t <- track(m)
+  s <- standard.error(t)
+  change.direction(s)
+}
+
+sym <- t(sapply(runif(1e6, 2.1, 100), get.single.track))
+sym <- data.frame(sym)
+colnames(sym) <- c('momentum', 'loc1', 'loc2', 'loc3')
+write.csv(sym, 'symulacja-20170323.csv', row.names=F)
+
+
+
+
+
+
